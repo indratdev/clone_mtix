@@ -1,80 +1,74 @@
+import 'package:clone_mtix/module/dashboard/controller/dashboard_controller.dart';
+import 'package:clone_mtix/module/dashboard/view/appbardefault_widget.dart';
+import 'package:clone_mtix/module/mfood/view/mfood_screen.dart';
+import 'package:clone_mtix/module/mymtix/view/mymtix_screen.dart';
+import 'package:clone_mtix/module/playing/view/playing_screen.dart';
+import 'package:clone_mtix/module/theater/view/theater_screen.dart';
+import 'package:clone_mtix/module/upcoming/view/upcoming_screen.dart';
+import 'package:clone_mtix/shared/utils/colors/colors_app.dart';
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../shared/utils/constants.dart';
-
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  final DashboardController controller = DashboardController();
+
+  @override
   Widget build(BuildContext context) {
+    final _buildBody = <Widget>[
+      PlayingScreen(controller: controller),
+      UpcomingScreen(),
+      TheaterScreen(),
+      MfoodScreen(),
+      MyMtixScreen(),
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.menu,
+      appBar: const AppbarDefault(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Playing',
           ),
-        ),
-        title: Image.asset(
-          xxiLogo,
-          fit: BoxFit.cover,
-          height: MediaQuery.of(context).size.height / 7,
-        ),
-        centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.refresh))],
-      ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 1,
-                child: Container(
-                  color: Colors.amber,
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                      ),
-                      Text("JAKARTA"),
-                      Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 2,
-                child: Container(
-                  color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Flexible(
-                        child: ListTile(
-                          minLeadingWidth: 1,
-                          leading: Icon(Icons.forward_to_inbox),
-                          title: Text("Inbox"),
-                        ),
-                      ),
-                      Flexible(
-                        child: ListTile(
-                          minLeadingWidth: 1,
-                          leading: Icon(Icons.topic),
-                          title: Text("Inbox"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'UpComing',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Theater',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.bowlFood),
+            label: 'M.Food',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'My m.tix',
           ),
         ],
+        selectedItemColor: ColorsApp.greenApp,
+        unselectedItemColor: ColorsApp.greenApp.withOpacity(0.5),
+        showUnselectedLabels: true,
+        currentIndex: controller.getIndexBottomNav,
+        onTap: (value) {
+          controller.setIndexBottomNav = value;
+          setState(() {});
+        },
       ),
+      body: _buildBody[controller.getIndexBottomNav],
     );
   }
 }
+
+final List<Map> myProducts =
+    List.generate(20, (index) => {"id": index, "name": "Product $index"})
+        .toList();
