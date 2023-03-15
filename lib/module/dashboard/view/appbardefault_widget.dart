@@ -1,3 +1,4 @@
+import 'package:clone_mtix/module/playing/controller/playing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,7 +13,10 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          // PlayingController controller = PlayingController();
+          // controller.playingMovie();
+        },
         icon: Icon(
           Icons.menu,
         ),
