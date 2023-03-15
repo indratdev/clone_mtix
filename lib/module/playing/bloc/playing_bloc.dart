@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:clone_mtix/model/movie/movie_model.dart';
 import 'package:clone_mtix/model/movie_credits/movie_credits_model.dart';
+import 'package:clone_mtix/model/movie_detail/movie_detail_model.dart';
 import 'package:clone_mtix/module/playing/controller/playing_controller.dart';
 import 'package:equatable/equatable.dart';
 
@@ -19,6 +20,24 @@ class PlayingBloc extends Bloc<PlayingEvent, PlayingState> {
       } catch (e) {
         emit(FailureNowPlaying(info: e.toString()));
       }
+    });
+
+    on<GetDetailNowPlayingEvent>((event, emit) async {
+      emit(LoadingDetailNowPlayingMovie());
+      // try {
+      //   // credit
+      //   MovieCreditsModel? creditsResult =
+      //       await controller.creditMovie(event.idMovie);
+      //   // detail movie
+      //   MovieDetailModel? detailResult =
+      //       await controller.movieDetail(event.idMovie);
+      //   // if (creditsResult != null && detailResult != null) {
+      //   emit(SuccessDetailNowPlayingMovie(
+      //       creditsResult: creditsResult!, detailResult: detailResult!));
+      //   // }
+      // } catch (e) {
+      //   emit(FailureDetailNowPlayingMovie(info: e.toString()));
+      // }
     });
   }
 }

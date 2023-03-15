@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:clone_mtix/model/movie/movie_model.dart';
+
 import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
-import 'package:clone_mtix/module/playing/view/detail_playing_screen.dart';
-import 'package:clone_mtix/service/api_service.dart';
 import 'package:clone_mtix/shared/route/routes.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,8 +64,10 @@ class PlayingScreen extends StatelessWidget {
                             icon: FaIcon(FontAwesomeIcons.inbox),
                             label: Text("Inbox"),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: ColorsApp.greenApp,
+                              // backgroundColor: Colors.white,
+                              // foregroundColor: ColorsApp.greenApp,
+                              primary: Colors.white,
+
                               elevation: 0,
                             ),
                           ),
@@ -75,8 +76,10 @@ class PlayingScreen extends StatelessWidget {
                             icon: FaIcon(FontAwesomeIcons.ticket),
                             label: Text("E-Voucher"),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: ColorsApp.greenApp,
+                              // backgroundColor: Colors.white,
+                              // foregroundColor: ColorsApp.greenApp,
+                              primary: Colors.white,
+
                               elevation: 0,
                             ),
                           ),
@@ -162,8 +165,17 @@ class PlayingScreen extends StatelessWidget {
                               //       DetailPlayingScreen(result: item[index]),
                               // ));
 
-                              var abc =
-                                  APIService().getCreditMovie(item[index].id);
+                              // var abc =
+                              //     APIService().getCreditMovie(item[index].id);
+                              BlocProvider.of<PlayingBloc>(context).add(
+                                  GetDetailNowPlayingEvent(
+                                      idMovie: item[index].id));
+                              Navigator.pushNamed(
+                                  context, AppRoutes.detailPlayingScreen);
+
+                              // context.read<PlayingBloc>()
+                              //   ..add(GetDetailNowPlayingEvent(
+                              //       idMovie: item[index].id));
                             },
                             child: Material(
                               elevation: 10,

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:clone_mtix/model/movie_credits/movie_credits_model.dart';
+import 'package:clone_mtix/model/movie_detail/movie_detail_model.dart';
 
 import '../model/movie/movie_model.dart';
 import 'package:http/http.dart' as http;
@@ -62,6 +63,26 @@ class APIService {
       throw Exception(e.toString());
     }
     print("getCreditMovie : ${result}");
+    return result;
+  }
+
+  Future<MovieDetailModel?> getDetailMovie(int idMovie) async {
+    // /movie/{movie_id}
+    MovieDetailModel? result;
+    String path = "$creditsUrl$idMovie";
+    try {
+      var uri = Uri.https(endPointUrl, path, queryParameters);
+
+      final response = await http.get(uri, headers: headers);
+      if (response.statusCode == 200) {
+        final item = jsonDecode(response.body);
+        result = MovieDetailModel.fromJson(item);
+      }
+    } catch (e) {
+      print("error : $e");
+      throw Exception(e.toString());
+    }
+    print("getDetailMovie : ${result}");
     return result;
   }
 }

@@ -40,21 +40,23 @@ class SuccessNowPlaying extends PlayingState {
 
 // now playing end
 
-// credit movie
-// class FailureCreditsMovie extends FailurePlaying {
-//   FailureCreditsMovie({required super.info});
-// }
+// detail now playing movie
+class FailureDetailNowPlayingMovie extends FailurePlaying {
+  FailureDetailNowPlayingMovie({required super.info});
+}
 
-// class LoadingCreditsMovie extends PlayingState {}
+class LoadingDetailNowPlayingMovie extends PlayingState {}
 
-// class SuccessCreditsMovie extends PlayingState {
-//   MovieCreditsModel result;
+class SuccessDetailNowPlayingMovie extends PlayingState {
+  MovieCreditsModel creditsResult;
+  MovieDetailModel detailResult;
 
-//   SuccessCreditsMovie({
-//     required this.result,
-//   });
+  SuccessDetailNowPlayingMovie({
+    required this.creditsResult,
+    required this.detailResult,
+  });
 
-//   List<Object> get props => [result];
-// }
+  List<Object> get props => [creditsResult, detailResult];
+}
 
 // credit movie end

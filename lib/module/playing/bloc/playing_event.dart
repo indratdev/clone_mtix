@@ -8,3 +8,11 @@ abstract class PlayingEvent extends Equatable {
 }
 
 class GetNowPlayingEvent extends PlayingEvent {}
+
+class GetDetailNowPlayingEvent extends PlayingEvent {
+  int idMovie;
+
+  GetDetailNowPlayingEvent({
+    required this.idMovie,
+  });
+}
