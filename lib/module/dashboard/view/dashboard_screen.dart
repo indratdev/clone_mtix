@@ -1,11 +1,13 @@
 import 'package:clone_mtix/module/dashboard/controller/dashboard_controller.dart';
 import 'package:clone_mtix/module/dashboard/view/appbardefault_widget.dart';
+import 'package:clone_mtix/module/dashboard/view/export.dart';
 import 'package:clone_mtix/module/mfood/view/mfood_screen.dart';
 import 'package:clone_mtix/module/mymtix/view/mymtix_screen.dart';
 import 'package:clone_mtix/module/playing/view/playing_screen.dart';
 import 'package:clone_mtix/module/theater/view/theater_screen.dart';
 import 'package:clone_mtix/module/upcoming/view/upcoming_screen.dart';
 import 'package:clone_mtix/shared/utils/colors/colors_app.dart';
+import 'package:clone_mtix/shared/utils/text_style/text_style_app.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,6 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: const AppbarDefault(),
+      drawer: DrawerDashboardWidget(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

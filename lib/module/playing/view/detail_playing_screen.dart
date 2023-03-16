@@ -26,6 +26,11 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
 
     return WillPopScope(
       onWillPop: () async {
+        // Navigator.of(context).pop(MaterialPageRoute(
+        //   builder: (newContext) => BlocProvider.value(
+        //     value: BlocProvider.of<PlayingBloc>(context),
+        //   ),
+        // ));
         BlocProvider.of<PlayingBloc>(context).add(GetNowPlayingEvent());
         return true;
       },

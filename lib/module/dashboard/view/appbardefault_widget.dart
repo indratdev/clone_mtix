@@ -12,15 +12,15 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        onPressed: () {
-          // PlayingController controller = PlayingController();
-          // controller.playingMovie();
-        },
-        icon: Icon(
-          Icons.menu,
-        ),
-      ),
+      // leading: IconButton(
+      //   onPressed: () {
+      //     // PlayingController controller = PlayingController();
+      //     // controller.playingMovie();
+      //   },
+      //   icon: Icon(
+      //     Icons.menu,
+      //   ),
+      // ),
       title: Image.asset(
         xxiLogo,
         fit: BoxFit.cover,
@@ -32,6 +32,7 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {}, icon: FaIcon(FontAwesomeIcons.arrowsRotate))
       ],
     );
+    
   }
 
   @override
