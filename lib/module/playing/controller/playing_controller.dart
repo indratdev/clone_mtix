@@ -17,4 +17,52 @@ class PlayingController {
   Future<MovieDetailModel?> movieDetail(int idMovie) async {
     return await serviceApi.getDetailMovie(idMovie);
   }
+
+  String convertGenreListToString(List<Genres> value) {
+    List<String> result = [];
+    value.forEach((value) {
+      result.add(value.name);
+    });
+    return result.join(", ");
+  }
+
+  String findProducerName(List<Crew> crew) {
+    String producerName = "";
+    crew.forEach((element) {
+      if (element.job.toLowerCase() == "producer") {
+        producerName = element.name;
+      }
+    });
+
+    return producerName;
+  }
+
+  String findCrewName(List<Crew> crew) {
+    List<String> listName = [];
+    crew.forEach((element) {
+      if (element.job.toLowerCase().contains("writer")) {
+        listName.add(element.name);
+      }
+    });
+
+    return listName.first.toString();
+  }
+
+  String findAllCastName(List<Cast> cast) {
+    List<String> listName = [];
+    cast.forEach((element) {
+      listName.add(element.name.toString());
+    });
+
+    return listName.join(", ");
+  }
+
+  String findProductionCompany(List<ProductionCompanies> company) {
+    List<String> listName = [];
+    company.forEach((element) {
+      listName.add("${element.name}");
+    });
+
+    return listName.join(", ");
+  }
 }

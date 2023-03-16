@@ -24,20 +24,20 @@ class PlayingBloc extends Bloc<PlayingEvent, PlayingState> {
 
     on<GetDetailNowPlayingEvent>((event, emit) async {
       emit(LoadingDetailNowPlayingMovie());
-      // try {
-      //   // credit
-      //   MovieCreditsModel? creditsResult =
-      //       await controller.creditMovie(event.idMovie);
-      //   // detail movie
-      //   MovieDetailModel? detailResult =
-      //       await controller.movieDetail(event.idMovie);
-      //   // if (creditsResult != null && detailResult != null) {
-      //   emit(SuccessDetailNowPlayingMovie(
-      //       creditsResult: creditsResult!, detailResult: detailResult!));
-      //   // }
-      // } catch (e) {
-      //   emit(FailureDetailNowPlayingMovie(info: e.toString()));
-      // }
+      try {
+        // credit
+        MovieCreditsModel? creditsResult =
+            await controller.creditMovie(event.idMovie);
+
+        // detail movie
+        MovieDetailModel? detailResult =
+            await controller.movieDetail(event.idMovie);
+
+        emit(SuccessDetailNowPlayingMovie(
+            creditsResult: creditsResult!, detailResult: detailResult!));
+      } catch (e) {
+        emit(FailureDetailNowPlayingMovie(info: e.toString()));
+      }
     });
   }
 }

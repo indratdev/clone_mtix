@@ -6,7 +6,7 @@ part 'movie_detail_model.g.dart';
 class MovieDetailModel {
   bool adult;
   String backdrop_path;
-  BelongToCollection belongs_to_collection;
+  BelongToCollection? belongs_to_collection;
   int budget;
   List<Genres> genres;
   String homepage;
@@ -33,7 +33,7 @@ class MovieDetailModel {
   MovieDetailModel({
     required this.adult,
     required this.backdrop_path,
-    required this.belongs_to_collection,
+    this.belongs_to_collection,
     required this.budget,
     required this.genres,
     required this.homepage,
@@ -102,15 +102,15 @@ class BelongToCollection {
 @JsonSerializable()
 class ProductionCompanies {
   int id;
-  String logo_path;
-  String name;
-  String origin_country;
+  String? logo_path;
+  String? name;
+  String? origin_country;
 
   ProductionCompanies({
     required this.id,
-    required this.logo_path,
-    required this.name,
-    required this.origin_country,
+    this.logo_path,
+    this.name,
+    this.origin_country,
   });
 
   factory ProductionCompanies.fromJson(Map<String, dynamic> json) =>

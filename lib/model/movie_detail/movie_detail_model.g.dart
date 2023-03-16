@@ -10,8 +10,10 @@ MovieDetailModel _$MovieDetailModelFromJson(Map<String, dynamic> json) =>
     MovieDetailModel(
       adult: json['adult'] as bool,
       backdrop_path: json['backdrop_path'] as String,
-      belongs_to_collection: BelongToCollection.fromJson(
-          json['belongs_to_collection'] as Map<String, dynamic>),
+      belongs_to_collection: json['belongs_to_collection'] == null
+          ? null
+          : BelongToCollection.fromJson(
+              json['belongs_to_collection'] as Map<String, dynamic>),
       budget: json['budget'] as int,
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genres.fromJson(e as Map<String, dynamic>))
@@ -102,9 +104,9 @@ Map<String, dynamic> _$BelongToCollectionToJson(BelongToCollection instance) =>
 ProductionCompanies _$ProductionCompaniesFromJson(Map<String, dynamic> json) =>
     ProductionCompanies(
       id: json['id'] as int,
-      logo_path: json['logo_path'] as String,
-      name: json['name'] as String,
-      origin_country: json['origin_country'] as String,
+      logo_path: json['logo_path'] as String?,
+      name: json['name'] as String?,
+      origin_country: json['origin_country'] as String?,
     );
 
 Map<String, dynamic> _$ProductionCompaniesToJson(

@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
-import 'package:clone_mtix/shared/route/routes.dart';
-
+import 'package:clone_mtix/module/playing/view/detail_playing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +10,26 @@ import '../../../shared/utils/colors/colors_app.dart';
 import '../../../shared/utils/text_style/text_style_app.dart';
 import '../../dashboard/controller/dashboard_controller.dart';
 
-class PlayingScreen extends StatelessWidget {
+class PlayingScreen extends StatefulWidget {
   const PlayingScreen({
     Key? key,
     this.controller,
   }) : super(key: key);
 
   final DashboardController? controller;
+
+  @override
+  State<PlayingScreen> createState() => _PlayingScreenState();
+}
+
+class _PlayingScreenState extends State<PlayingScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // BlocProvider.of<PlayingBloc>(context)..add(GetNowPlayingEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +75,8 @@ class PlayingScreen extends StatelessWidget {
                             icon: FaIcon(FontAwesomeIcons.inbox),
                             label: Text("Inbox"),
                             style: ElevatedButton.styleFrom(
-                              // backgroundColor: Colors.white,
-                              // foregroundColor: ColorsApp.greenApp,
-                              primary: Colors.white,
-
+                              backgroundColor: Colors.white,
+                              foregroundColor: ColorsApp.greenApp,
                               elevation: 0,
                             ),
                           ),
@@ -76,10 +85,8 @@ class PlayingScreen extends StatelessWidget {
                             icon: FaIcon(FontAwesomeIcons.ticket),
                             label: Text("E-Voucher"),
                             style: ElevatedButton.styleFrom(
-                              // backgroundColor: Colors.white,
-                              // foregroundColor: ColorsApp.greenApp,
-                              primary: Colors.white,
-
+                              backgroundColor: Colors.white,
+                              foregroundColor: ColorsApp.greenApp,
                               elevation: 0,
                             ),
                           ),
@@ -98,7 +105,7 @@ class PlayingScreen extends StatelessWidget {
                   autoPlay: true,
                   autoPlayAnimationDuration: Duration(seconds: 2),
                 ),
-                items: controller!.getBannerMovie.map((i) {
+                items: widget.controller!.getBannerMovie.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
@@ -157,25 +164,15 @@ class PlayingScreen extends StatelessWidget {
                           return InkWell(
                             onTap: () {
                               print(">>> tap : Movie_id : ${item[index].id}");
-                              // Navigator.pushNamed(
-                              //     context, AppRoutes.detailPlayingScreen);
 
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //   builder: (context) =>
-                              //       DetailPlayingScreen(result: item[index]),
-                              // ));
-
-                              // var abc =
-                              //     APIService().getCreditMovie(item[index].id);
-                              BlocProvider.of<PlayingBloc>(context).add(
-                                  GetDetailNowPlayingEvent(
-                                      idMovie: item[index].id));
-                              Navigator.pushNamed(
-                                  context, AppRoutes.detailPlayingScreen);
-
-                              // context.read<PlayingBloc>()
-                              //   ..add(GetDetailNowPlayingEvent(
-                              //       idMovie: item[index].id));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (newContext) => BlocProvider.value(
+                                  value: BlocProvider.of<PlayingBloc>(context)
+                                    ..add(GetDetailNowPlayingEvent(
+                                        idMovie: item[index].id)),
+                                  child: DetailPlayingScreen(),
+                                ),
+                              ));
                             },
                             child: Material(
                               elevation: 10,

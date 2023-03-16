@@ -62,7 +62,6 @@ class APIService {
       print("error : $e");
       throw Exception(e.toString());
     }
-    print("getCreditMovie : ${result}");
     return result;
   }
 
@@ -82,7 +81,7 @@ class APIService {
       print("error : $e");
       throw Exception(e.toString());
     }
-    print("getDetailMovie : ${result}");
+
     return result;
   }
 }
