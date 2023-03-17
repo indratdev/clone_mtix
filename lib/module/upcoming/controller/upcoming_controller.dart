@@ -7,4 +7,17 @@ class UpcomingController {
   Future<MovieModel?> upcomoingMovie() async {
     return await serviceAPI.getMoviebyParam(TypeMovie.upcoming);
   }
+
+  searchUpcomingMovie(MovieModel movieModel, String searchString) {
+    MovieModel? value;
+
+    movieModel.results.forEach((element) {
+      if (element.title.toLowerCase().toString().contains("or")) {
+        print(">>> ${element.title}");
+        value?.results.add(element);
+      }
+
+      print(value);
+    });
+  }
 }

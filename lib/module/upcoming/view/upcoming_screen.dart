@@ -1,10 +1,25 @@
 import 'package:clone_mtix/module/upcoming/bloc/upcoming_bloc.dart';
+import 'package:clone_mtix/module/upcoming/controller/upcoming_controller.dart';
+import 'package:clone_mtix/module/upcoming/view/export.dart';
 import 'package:clone_mtix/shared/widget/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpcomingScreen extends StatelessWidget {
+import '../../../model/movie/movie_model.dart';
+
+class UpcomingScreen extends StatefulWidget {
   const UpcomingScreen({super.key});
+
+  @override
+  State<UpcomingScreen> createState() => _UpcomingScreenState();
+}
+
+class _UpcomingScreenState extends State<UpcomingScreen> {
+  final UpcomingController controller = UpcomingController();
+  final TextEditingController filterController = TextEditingController();
+
+  MovieModel? data;
+  MovieModel? filterData;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +35,27 @@ class UpcomingScreen extends StatelessWidget {
               return SizedBox(child: CircularProgressIndicator.adaptive());
             }
             if (state is SuccessUpcomingMovie) {
-              var data = state.result;
+              data = state.result;
+              filterData = data;
               return Column(
                 children: <Widget>[
                   TextField(
-                    decoration: InputDecoration(
+                    controller: filterController,
+                    onChanged: (value) {
+                      print(">>> data : ${data!.results}");
+                      setState(() {
+                        filterData!.results = data!.results
+                            .where((element) => element.title
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      });
+                    },
+                    decoration: const InputDecoration(
                         hintText: "Type a movie to search",
                         contentPadding: EdgeInsets.symmetric(horizontal: 20)),
                   ),
-                  Expanded(child: ListMovieWidget(data: data)),
+                  Expanded(child: ListMovieWidget(data: filterData!)),
                 ],
               );
             } else {
