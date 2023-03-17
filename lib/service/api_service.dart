@@ -9,10 +9,16 @@ import '../model/movie/movie_model.dart';
 import 'package:http/http.dart' as http;
 import '../shared//utils/constants/constants.dart';
 
+enum TypeMovie {
+  now,
+  upcoming,
+}
+
 class APIService {
   final endPointUrl = "api.themoviedb.org";
   final nowPlayingUrl = "/3/movie/now_playing";
   final creditsUrl = "/3/movie/";
+  final upcomingUrl = "/3/movie/upcoming";
 
   var queryParameters = {
     'api_key': apiKey,
@@ -22,6 +28,17 @@ class APIService {
   var headers = {
     HttpHeaders.contentTypeHeader: "application/json",
   };
+
+  String urlMovie(TypeMovie typeMovie) {
+    String url = "";
+    if (typeMovie.name == TypeMovie.now.name) {
+      url = nowPlayingUrl;
+    } else if (typeMovie.name == TypeMovie.upcoming.name) {
+      url = upcomingUrl;
+    }
+
+    return url;
+  }
 
   Future<MovieModel?> getNowPlayingMovie() async {
     MovieModel? result;
@@ -44,8 +61,6 @@ class APIService {
   }
 
   // get credits movie
-  // https://api.themoviedb.org/3/movie/315162/credits?api_key=257a08071c1baefe6dadf1d9957e0ef2
-
   Future<MovieCreditsModel?> getCreditMovie(int idMovie) async {
     MovieCreditsModel? result;
 
@@ -65,6 +80,7 @@ class APIService {
     return result;
   }
 
+  // get detail movie
   Future<MovieDetailModel?> getDetailMovie(int idMovie) async {
     // /movie/{movie_id}
     MovieDetailModel? result;
@@ -76,6 +92,28 @@ class APIService {
       if (response.statusCode == 200) {
         final item = jsonDecode(response.body);
         result = MovieDetailModel.fromJson(item);
+      }
+    } catch (e) {
+      print("error : $e");
+      throw Exception(e.toString());
+    }
+
+    return result;
+  }
+
+  // get movie by param
+  Future<MovieModel?> getMoviebyParam(TypeMovie typeMovie) async {
+    MovieModel? result;
+    try {
+      String urlPath = urlMovie(typeMovie);
+
+      var uri = Uri.https(endPointUrl, urlPath, queryParameters);
+
+      final response = await http.get(uri, headers: headers);
+
+      if (response.statusCode == 200) {
+        final item = jsonDecode(response.body);
+        result = MovieModel.fromJson(item);
       }
     } catch (e) {
       print("error : $e");

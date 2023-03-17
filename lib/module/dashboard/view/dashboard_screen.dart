@@ -1,5 +1,5 @@
 import 'package:clone_mtix/module/dashboard/controller/dashboard_controller.dart';
-import 'package:clone_mtix/module/dashboard/view/appbardefault_widget.dart';
+import 'package:clone_mtix/module/dashboard/view/widget/appbar_default_widget.dart';
 import 'package:clone_mtix/module/dashboard/view/export.dart';
 import 'package:clone_mtix/module/mfood/view/mfood_screen.dart';
 import 'package:clone_mtix/module/mymtix/view/mymtix_screen.dart';

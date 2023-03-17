@@ -1,8 +1,6 @@
-import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
 import 'package:clone_mtix/shared/route/routes.dart';
 import 'package:clone_mtix/shared/utils/colors/colors_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());

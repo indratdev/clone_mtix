@@ -1,8 +1,7 @@
-import 'package:clone_mtix/module/playing/controller/playing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../shared/utils/constants/constants.dart';
+import '../../../../shared/utils/constants/constants.dart';
 
 class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
   const AppbarDefault({
@@ -32,7 +31,6 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {}, icon: FaIcon(FontAwesomeIcons.arrowsRotate))
       ],
     );
-    
   }
 
   @override
