@@ -23,6 +23,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(">>> refresh halaman");
+    // MovieModel? filterData;
     return BlocProvider(
       create: (context) => UpcomingBloc()..add(GetListUpcomingMovie()),
       child: Scaffold(
@@ -36,19 +38,26 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
             }
             if (state is SuccessUpcomingMovie) {
               data = state.result;
+              // filterData?.results.add(data.results.toList());
               filterData = data;
+
               return Column(
                 children: <Widget>[
                   TextField(
                     controller: filterController,
                     onChanged: (value) {
                       print(">>> data : ${data!.results}");
+                      // MovieModel? result;
                       setState(() {
-                        filterData!.results = data!.results
-                            .where((element) => element.title
-                                .toLowerCase()
-                                .contains(value.toLowerCase()))
-                            .toList();
+                        if (filterData!.results.isNotEmpty) {
+                          filterData!.results = data!.results
+                              .where((element) => element.title
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()))
+                              .toList();
+                        } else {
+                          filterData = data;
+                        }
                       });
                     },
                     decoration: const InputDecoration(

@@ -1,25 +1,19 @@
+import 'package:clone_mtix/module/mymtix/view/mymtix_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../shared/utils/constants/constants.dart';
 
 class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
-  const AppbarDefault({
+  bool isMtixScreen;
+  AppbarDefault({
     Key? key,
+    this.isMtixScreen = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // leading: IconButton(
-      //   onPressed: () {
-      //     // PlayingController controller = PlayingController();
-      //     // controller.playingMovie();
-      //   },
-      //   icon: Icon(
-      //     Icons.menu,
-      //   ),
-      // ),
       title: Image.asset(
         xxiLogo,
         fit: BoxFit.cover,
@@ -27,8 +21,10 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        IconButton(
-            onPressed: () {}, icon: FaIcon(FontAwesomeIcons.arrowsRotate))
+        (isMtixScreen)
+            ? Container()
+            : IconButton(
+                onPressed: () {}, icon: FaIcon(FontAwesomeIcons.arrowsRotate))
       ],
     );
   }

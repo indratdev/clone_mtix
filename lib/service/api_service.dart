@@ -44,6 +44,7 @@ class APIService {
     MovieModel? result;
     try {
       var uri = Uri.https(endPointUrl, nowPlayingUrl, queryParameters);
+      print(uri);
 
       final response = await http.get(uri, headers: headers);
 

@@ -33,7 +33,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     ];
 
     return Scaffold(
-      appBar: const AppbarDefault(),
+      appBar: AppbarDefault(),
       drawer: DrawerDashboardWidget(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
