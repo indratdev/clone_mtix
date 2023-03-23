@@ -13,7 +13,8 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return 
+    AppBar(
       title: Image.asset(
         xxiLogo,
         fit: BoxFit.cover,

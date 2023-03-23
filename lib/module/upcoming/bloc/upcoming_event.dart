@@ -8,3 +8,13 @@ abstract class UpcomingEvent extends Equatable {
 }
 
 class GetListUpcomingMovie extends UpcomingEvent {}
+
+class SearchListUpcomingMovieEvent extends UpcomingEvent {
+  String text;
+  List<Results> masterData;
+
+  SearchListUpcomingMovieEvent({
+    required this.text,
+    required this.masterData,
+  });
+}

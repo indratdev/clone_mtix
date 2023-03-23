@@ -39,3 +39,23 @@ class SuccessUpcomingMovie extends UpcomingState {
 }
 
 // now playing end
+
+// now playing
+
+class FailureSearchUpcomingMovie extends FailurePlaying {
+  FailureSearchUpcomingMovie({required super.info});
+}
+
+class LoadingSearchUpcomingMovie extends UpcomingState {}
+
+class SuccessSearchUpcomingMovie extends UpcomingState {
+  List<Results> result;
+
+  SuccessSearchUpcomingMovie({
+    required this.result,
+  });
+
+  List<Object> get props => [result];
+}
+
+// now playing end

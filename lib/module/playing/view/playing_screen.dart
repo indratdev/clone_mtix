@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:clone_mtix/model/movie/movie_model.dart';
+
 import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
-import 'package:clone_mtix/module/playing/view/detail_playing_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -151,7 +151,6 @@ class _PlayingScreenState extends State<PlayingScreen> {
                 }
 
                 if (state is SuccessNowPlaying) {
-                  print("statess ==> ${state.result}");
                   var data = state.result;
                   return ListMovieWidget(data: data);
                 } else {
