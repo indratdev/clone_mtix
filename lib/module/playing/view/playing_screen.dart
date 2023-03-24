@@ -26,140 +26,130 @@ class PlayingScreen extends StatefulWidget {
 
 class _PlayingScreenState extends State<PlayingScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    // BlocProvider.of<PlayingBloc>(context)..add(GetNowPlayingEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PlayingBloc()..add(GetNowPlayingEvent()),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.white,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.location_on,
-                        ),
-                        Text(
-                          "JAKARTA",
-                          style: TextStyleApp.textDefaultOrange,
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                        ),
-                      ],
-                    ),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 1,
+                child: Container(
+                  color: Colors.white,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                      ),
+                      Text(
+                        "JAKARTA",
+                        style: TextStyleApp.textDefaultOrange,
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                      ),
+                    ],
                   ),
                 ),
-                Flexible(
-                  flex: 2,
-                  child: Container(
-                    // alignment: Alignment.centerRight,
-                    // color: Colors.red,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: FaIcon(FontAwesomeIcons.inbox),
-                            label: Text("Inbox"),
-                            style: ElevatedButton.styleFrom(
-                              // backgroundColor: Colors.white,
-                              // foregroundColor: ColorsApp.greenApp,
-                              primary: Colors.white,
-                              onPrimary: ColorsApp.greenApp,
-                              elevation: 0,
-                            ),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: FaIcon(FontAwesomeIcons.ticket),
-                            label: Text("E-Voucher"),
-                            style: ElevatedButton.styleFrom(
-                              // backgroundColor: Colors.white,
-                              // foregroundColor: ColorsApp.greenApp,
-                              primary: Colors.white,
-                              onPrimary: ColorsApp.greenApp,
-                              elevation: 0,
-                            ),
-                          ),
-                        ]),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              color: Colors.amber,
-              height: MediaQuery.of(context).size.height / 4,
-              width: MediaQuery.of(context).size.width,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  height: 400.0,
-                  autoPlay: true,
-                  autoPlayAnimationDuration: Duration(seconds: 2),
-                ),
-                items: widget.controller!.getBannerMovie.map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        // decoration: BoxDecoration(color: Colors.blue),
-                        child: CachedNetworkImage(
-                          imageUrl: i,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                // colorFilter: ColorFilter.mode(
-                                //     Colors.red, BlendMode.colorBurn),
-                              ),
-                            ),
-                          ),
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
               ),
+              Flexible(
+                flex: 2,
+                child: Container(
+                  // alignment: Alignment.centerRight,
+                  // color: Colors.red,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: FaIcon(FontAwesomeIcons.inbox),
+                          label: Text("Inbox"),
+                          style: ElevatedButton.styleFrom(
+                            // backgroundColor: Colors.white,
+                            // foregroundColor: ColorsApp.greenApp,
+                            primary: Colors.white,
+                            onPrimary: ColorsApp.greenApp,
+                            elevation: 0,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: FaIcon(FontAwesomeIcons.ticket),
+                          label: Text("E-Voucher"),
+                          style: ElevatedButton.styleFrom(
+                            // backgroundColor: Colors.white,
+                            // foregroundColor: ColorsApp.greenApp,
+                            primary: Colors.white,
+                            onPrimary: ColorsApp.greenApp,
+                            elevation: 0,
+                          ),
+                        ),
+                      ]),
+                ),
+              )
+            ],
+          ),
+          Container(
+            color: Colors.amber,
+            height: MediaQuery.of(context).size.height / 4,
+            width: MediaQuery.of(context).size.width,
+            child: CarouselSlider(
+              options: CarouselOptions(
+                height: 400.0,
+                autoPlay: true,
+                autoPlayAnimationDuration: Duration(seconds: 2),
+              ),
+              items: widget.controller!.getBannerMovie.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      // decoration: BoxDecoration(color: Colors.blue),
+                      child: CachedNetworkImage(
+                        imageUrl: i,
+                        imageBuilder: (context, imageProvider) => Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                              // colorFilter: ColorFilter.mode(
+                              //     Colors.red, BlendMode.colorBurn),
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
             ),
-            BlocBuilder<PlayingBloc, PlayingState>(
-              builder: (context, state) {
-                if (state is LoadingNowPlaying) {
-                  return Center(child: CircularProgressIndicator.adaptive());
-                }
-                if (state is FailureNowPlaying) {
-                  return Text(state.info.toString());
-                }
+          ),
+          BlocBuilder<PlayingBloc, PlayingState>(
+            builder: (context, state) {
+              if (state is LoadingNowPlaying) {
+                return const Center(
+                    child: CircularProgressIndicator.adaptive());
+              }
+              if (state is FailureNowPlaying) {
+                return Text(state.info.toString());
+              }
 
-                if (state is SuccessNowPlaying) {
-                  var data = state.result;
-                  return ListMovieWidget(data: data);
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ],
-        ),
+              if (state is SuccessNowPlaying) {
+                var data = state.result;
+                return ListMovieWidget(data: data);
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

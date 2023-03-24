@@ -24,8 +24,7 @@ class ListLocationCinema extends StatelessWidget {
           var data = masterLocation[index];
           return InkWell(
             onTap: () {
-              context
-                  .read<TheaterBloc>()
+              BlocProvider.of<TheaterBloc>(context)
                   .add(SelectedLocationCinemaEvent(locationCinema: data));
               // BlocProvider.of<TheaterlocationBloc>(context)
               //     .add(SelectedLocationCinemaEvent(locationCinema: data));

@@ -1,4 +1,5 @@
 const xxiLogo = 'assets/logos/xxi_logo.webp';
+const xxicafe = 'assets/images/xxicafe.webp';
 const mtixLogo = 'assets/logos/mtix_logo.webp';
 const mtixIcon = 'assets/logos/mtix_icon.webp';
 

@@ -29,10 +29,12 @@ class FailureTheaterCinema extends FailureTheater {
 class SuccessTheaterCinema extends TheaterState {
   List<TheaterModel> theaterModel;
   String location;
+  TheaterOption theaterOption;
 
   SuccessTheaterCinema({
     required this.location,
     required this.theaterModel,
+    required this.theaterOption,
   });
 
   List<Object> get props => [location, theaterModel];
@@ -90,11 +92,13 @@ class SuccessListTheaterLocation extends TheaterState {
 // selected location cinema
 class SuccessSelectedTheaterLocation extends TheaterState {
   String selectedLocation;
+  List<TheaterModel> listData;
 
   SuccessSelectedTheaterLocation({
     required this.selectedLocation,
+    required this.listData,
   });
 
-  List<Object> get props => [selectedLocation];
+  List<Object> get props => [selectedLocation, listData];
 }
 // selected location cinema end

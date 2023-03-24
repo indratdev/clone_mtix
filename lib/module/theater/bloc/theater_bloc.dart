@@ -11,7 +11,8 @@ part 'theater_state.dart';
 
 class TheaterBloc extends Bloc<TheaterEvent, TheaterState> {
   final TheaterController controller = TheaterController();
-  final TheaterLocationController  controllerLocation = TheaterLocationController();
+  final TheaterLocationController controllerLocation =
+      TheaterLocationController();
 
   TheaterBloc() : super(TheaterInitial()) {
     on<GetTheaterEvent>((event, emit) {
@@ -26,7 +27,18 @@ class TheaterBloc extends Bloc<TheaterEvent, TheaterState> {
         listData =
             controller.getTheaterByCinemaAndLocation(theaterOption, location);
 
-        emit(SuccessTheaterCinema(location: location, theaterModel: listData));
+        emit(SuccessTheaterCinema(
+          location: location,
+          theaterModel: listData,
+          theaterOption: theaterOption,
+        ));
+        // (!event.isSearch)
+        //     ? emit(SuccessTheaterCinema(
+        //         location: location, theaterModel: listData))
+        //     : emit(SuccessSelectedTheaterLocation(
+        //         selectedLocation: location,
+        //         listData: listData,
+        //       ));
       } catch (e) {
         log(e.toString());
         emit(FailureTheaterCinema(info: e.toString()));
@@ -69,8 +81,19 @@ class TheaterBloc extends Bloc<TheaterEvent, TheaterState> {
 
     on<SelectedLocationCinemaEvent>((event, emit) {
       print("bloc jalan");
-      emit(SuccessSelectedTheaterLocation(
-          selectedLocation: event.locationCinema));
+      try {
+        String location = event.locationCinema;
+        TheaterOption theaterOption = TheaterOption.cinemaxxi;
+        List<TheaterModel> listData = [];
+        listData =
+            controller.getTheaterByCinemaAndLocation(theaterOption, location);
+        emit(SuccessSelectedTheaterLocation(
+          selectedLocation: event.locationCinema,
+          listData: listData,
+        ));
+      } catch (e) {
+        log(e.toString());
+      }
     });
   }
 }

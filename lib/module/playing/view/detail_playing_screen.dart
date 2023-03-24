@@ -1,4 +1,3 @@
-import 'package:clone_mtix/model/movie/movie_model.dart';
 import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
 import 'package:clone_mtix/module/playing/controller/playing_controller.dart';
 import 'package:clone_mtix/shared/utils/colors/colors_app.dart';
@@ -26,11 +25,6 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        // Navigator.of(context).pop(MaterialPageRoute(
-        //   builder: (newContext) => BlocProvider.value(
-        //     value: BlocProvider.of<PlayingBloc>(context),
-        //   ),
-        // ));
         BlocProvider.of<PlayingBloc>(context).add(GetNowPlayingEvent());
         return true;
       },
@@ -50,7 +44,7 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
             }
 
             if (state is LoadingDetailNowPlayingMovie) {
-              return Center(child: CircularProgressIndicator.adaptive());
+              return const Center(child: CircularProgressIndicator.adaptive());
             }
             if (state is FailureDetailNowPlayingMovie) {
               return Center(
@@ -79,14 +73,14 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
                                 backgroundColor: Colors.blueAccent.shade100,
                                 child: Text(
                                   (!detailResult.adult) ? "13+" : "Adult",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,

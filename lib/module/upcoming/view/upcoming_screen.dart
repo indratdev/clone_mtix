@@ -21,11 +21,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
   Widget build(BuildContext context) {
     // final _upcomingBloc = context.read<UpcomingBloc>();
 
-    return BlocProvider.value(
-      value: UpcomingBloc()..add(GetListUpcomingMovie()),
-      child: Scaffold(
-        body: UpcomingBody(),
-      ),
+    return Scaffold(
+      body: UpcomingBody(),
     );
     // MovieModel? filterData;
     // return Scaffold(

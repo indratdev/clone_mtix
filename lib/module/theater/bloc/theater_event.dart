@@ -10,10 +10,12 @@ abstract class TheaterEvent extends Equatable {
 class GetTheaterEvent extends TheaterEvent {
   String location;
   TheaterOption theaterOption;
+  bool isSearch;
 
   GetTheaterEvent({
     required this.location,
     required this.theaterOption,
+    required this.isSearch,
   });
 }
 

@@ -16,20 +16,17 @@ class TheaterLocationScreen extends StatefulWidget {
 class _TheaterLocationScreenState extends State<TheaterLocationScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: TheaterBloc()..add(getLocationCinemaEvent()),
-      child: Scaffold(
-        backgroundColor: ColorsApp.backgroundDashboardColor,
-        appBar: AppBar(
-          title: Image.asset(
-            xxiLogo,
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height / 7,
-          ),
-          centerTitle: true,
+    return Scaffold(
+      backgroundColor: ColorsApp.backgroundDashboardColor,
+      appBar: AppBar(
+        title: Image.asset(
+          xxiLogo,
+          fit: BoxFit.cover,
+          height: MediaQuery.of(context).size.height / 7,
         ),
-        body: BodyLocationTheater(),
+        centerTitle: true,
       ),
+      body: BodyLocationTheater(),
     );
   }
 }
