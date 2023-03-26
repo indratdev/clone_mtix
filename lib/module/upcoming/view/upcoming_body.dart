@@ -18,6 +18,12 @@ class _UpcomingBodyState extends State<UpcomingBody> {
   List<Results> masterData = [];
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _upcomingBloc = BlocProvider.of<UpcomingBloc>(context);
 
@@ -47,13 +53,20 @@ class _UpcomingBodyState extends State<UpcomingBody> {
             if (state is SuccessUpcomingMovie) {
               masterData = state.result.results;
               var results = state.result.results;
-              return ListUpcomingMovieWidget(data: results);
+              return ListUpcomingMovieWidget(
+                data: results,
+                isUpcoming: true,
+              );
             }
             if (state is SuccessSearchUpcomingMovie) {
               var results = state.result;
-              return ListUpcomingMovieWidget(data: results);
+              return ListUpcomingMovieWidget(
+                data: results,
+                isUpcoming: true,
+              );
             }
-            return const Center(child: Text("No Data"));
+
+            return Container();
           },
         ),
       ],

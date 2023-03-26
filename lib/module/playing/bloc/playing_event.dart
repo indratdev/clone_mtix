@@ -16,3 +16,11 @@ class GetDetailNowPlayingEvent extends PlayingEvent {
     required this.idMovie,
   });
 }
+
+class SelectedLocationPlayingEvent extends PlayingEvent {
+  String locationCinema;
+
+  SelectedLocationPlayingEvent({
+    required this.locationCinema,
+  });
+}

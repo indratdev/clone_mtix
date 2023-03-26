@@ -102,3 +102,19 @@ class SuccessSelectedTheaterLocation extends TheaterState {
   List<Object> get props => [selectedLocation, listData];
 }
 // selected location cinema end
+
+class FailureNowPlayingOnCinema extends FailureTheater {
+  FailureNowPlayingOnCinema({required super.info});
+}
+
+class LoadingNowPlayingOnCinema extends TheaterState {}
+
+class SuccessNowPlayingOnCinema extends TheaterState {
+  MovieModel result;
+
+  SuccessNowPlayingOnCinema({
+    required this.result,
+  });
+
+  List<Object> get props => [result];
+}

@@ -1,4 +1,5 @@
 import 'package:clone_mtix/module/theater/controller/theater_controller.dart';
+import 'package:clone_mtix/module/theaterDetail/view/theater_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,18 +32,7 @@ class TheaterBodyWidget extends StatefulWidget {
 class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
   @override
   Widget build(BuildContext context) {
-    // optionTheater(TheaterOption option) {
-    //   if (option.name == TheaterOption.cinemaxxi.name) {
-    //     widget.selectedOption = TheaterOption.cinemaxxi;
-    //   } else if (option.name == TheaterOption.premiere.name) {
-    //     widget.selectedOption = TheaterOption.premiere;
-    //   } else if (option.name == TheaterOption.imax.name) {
-    //     widget.selectedOption = TheaterOption.imax;
-    //   }
-    // }
-
     return Container(
-      margin: const EdgeInsets.all(8),
       child: Column(
         children: [
           Row(
@@ -60,7 +50,7 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
                     color: Colors.white,
                     child: Row(
                       children: <Widget>[
-                        Text(
+                        const Text(
                           "Theaters in ",
                           style: TextStyleApp.titleTextGreen,
                         ),
@@ -68,7 +58,7 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
                           widget.locationCinema.toString().toUpperCase(),
                           style: TextStyleApp.textDefaultOrange,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.keyboard_arrow_down_outlined,
                         ),
                       ],
@@ -78,25 +68,21 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
               ),
               Flexible(
                 flex: 1,
-                child: Container(
-                  // alignment: Alignment.centerRight,
-                  // color: Colors.red,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.locationDot),
-                          label: const Text("Near Me"),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: ColorsApp.greenApp,
-                            elevation: 0,
-                          ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const FaIcon(FontAwesomeIcons.locationDot),
+                        label: const Text("Near Me"),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: ColorsApp.greenApp,
+                          elevation: 0,
                         ),
-                      ]),
-                ),
+                      ),
+                    ]),
               ),
             ],
           ),
@@ -117,7 +103,7 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
               Expanded(
                 child: Container(
                   decoration: (widget.selectedOption == TheaterOption.cinemaxxi)
-                      ? BoxDecoration(
+                      ? const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
                               width: 3.0,
@@ -134,18 +120,8 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
                             isSearch: false,
                             location: widget.locationCinema,
                             theaterOption: TheaterOption.cinemaxxi));
-                        // (!widget.isSearch)
-                        //     ? context.read<TheaterBloc>().add(GetTheaterEvent(
-                        //         isSearch: false,
-                        //         location: widget.locationCinema,
-                        //         theaterOption: TheaterOption.cinemaxxi))
-                        //     : context
-                        //         .read<TheaterBloc>()
-                        //         .add(SelectedLocationCinemaEvent(
-                        //           locationCinema: widget.locationCinema,
-                        //         ));
                       },
-                      child: Text(
+                      child: const Text(
                         "CINEMA XXI",
                         style: TextStyleApp.titleTextGreen,
                       )),
@@ -154,7 +130,7 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
               Expanded(
                 child: Container(
                   decoration: (widget.selectedOption == TheaterOption.premiere)
-                      ? BoxDecoration(
+                      ? const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
                               width: 3.0,
@@ -171,28 +147,15 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
                             isSearch: false,
                             location: widget.locationCinema,
                             theaterOption: TheaterOption.premiere));
-                        // (!widget.isSearch)
-                        //     ? context.read<TheaterBloc>().add(GetTheaterEvent(
-                        //         isSearch: false,
-                        //         location: widget.locationCinema,
-                        //         theaterOption: TheaterOption.premiere))
-                        //     : context
-                        //         .read<TheaterBloc>()
-                        //         .add(SelectedLocationCinemaEvent(
-                        //           locationCinema: widget.locationCinema,
-                        //         ));
-                        // ;
                       },
-                      child: Text(
-                        "PREMIERE",
-                        style: TextStyleApp.titleTextGreen,
-                      )),
+                      child: const Text("PREMIERE",
+                          style: TextStyleApp.titleTextGreen)),
                 ),
               ),
               Expanded(
                 child: Container(
                   decoration: (widget.selectedOption == TheaterOption.imax)
-                      ? BoxDecoration(
+                      ? const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
                               width: 3.0,
@@ -210,32 +173,47 @@ class _TheaterBodyWidgetState extends State<TheaterBodyWidget> {
                             location: widget.locationCinema,
                             theaterOption: TheaterOption.imax));
                       },
-                      child: Text(
-                        "IMAX",
-                        style: TextStyleApp.titleTextGreen,
-                      )),
+                      child: const Text("IMAX",
+                          style: TextStyleApp.titleTextGreen)),
                 ),
               ),
             ],
           ),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.listTheaters?.length ?? 0,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  minLeadingWidth: 5,
-                  leading: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width / 30,
-                      backgroundColor: ColorsApp.orangeMtix,
-                      child: Image.asset(
-                        mtixIcon,
-                        height: MediaQuery.of(context).size.width / 37,
-                      )),
-                  title: Text(widget.listTheaters?[index].name ?? ""),
-                  trailing: Icon(Icons.arrow_forward_ios_outlined),
-                );
-              },
+            child: Container(
+              // color: ColorsApp.backgroundDashboardColor,
+              child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                shrinkWrap: true,
+                itemCount: widget.listTheaters?.length ?? 0,
+                itemBuilder: (context, index) {
+                  TheaterModel? theater = widget.listTheaters?[index];
+                  return InkWell(
+                    onTap: () {
+                      BlocProvider.of<TheaterBloc>(context)
+                          .add(NowPlayingOnCinemaEvent());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                TheaterDetailScreen(theaterModel: theater),
+                          ));
+                    },
+                    child: ListTile(
+                      minLeadingWidth: 5,
+                      leading: CircleAvatar(
+                          radius: MediaQuery.of(context).size.width / 30,
+                          backgroundColor: ColorsApp.orangeMtix,
+                          child: Image.asset(
+                            mtixIcon,
+                            height: MediaQuery.of(context).size.width / 37,
+                          )),
+                      title: Text(theater?.name ?? ""),
+                      trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

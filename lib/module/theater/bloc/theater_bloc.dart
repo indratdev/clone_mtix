@@ -6,6 +6,9 @@ import 'package:clone_mtix/module/theaterLocation/controller/theater_location_co
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../model/movie/movie_model.dart';
+import '../../playing/controller/playing_controller.dart';
+
 part 'theater_event.dart';
 part 'theater_state.dart';
 
@@ -13,6 +16,7 @@ class TheaterBloc extends Bloc<TheaterEvent, TheaterState> {
   final TheaterController controller = TheaterController();
   final TheaterLocationController controllerLocation =
       TheaterLocationController();
+  final PlayingController controllerPlaying = PlayingController();
 
   TheaterBloc() : super(TheaterInitial()) {
     on<GetTheaterEvent>((event, emit) {
@@ -93,6 +97,17 @@ class TheaterBloc extends Bloc<TheaterEvent, TheaterState> {
         ));
       } catch (e) {
         log(e.toString());
+      }
+    });
+
+    on<NowPlayingOnCinemaEvent>((event, emit) async {
+      emit(LoadingNowPlayingOnCinema());
+      try {
+        var result = await controllerPlaying.nowPlayingMovie();
+
+        emit(SuccessNowPlayingOnCinema(result: result!));
+      } catch (e) {
+        emit(FailureNowPlayingOnCinema(info: e.toString()));
       }
     });
   }

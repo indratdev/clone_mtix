@@ -10,7 +10,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../shared/utils/constants/constants.dart';
 
 class DetailPlayingScreen extends StatefulWidget {
-  DetailPlayingScreen({super.key});
+  bool isUpcoming;
+
+  DetailPlayingScreen({
+    super.key,
+    this.isUpcoming = false,
+  });
 
   @override
   State<DetailPlayingScreen> createState() => _DetailPlayingScreenState();
@@ -18,6 +23,12 @@ class DetailPlayingScreen extends StatefulWidget {
 
 class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
   bool isReadSynopsis = false;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +96,13 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(detailResult.original_title.toString()),
+                                  Text(
+                                    detailResult.original_title.toString(),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
                                   Text(controller.convertGenreListToString(
                                       detailResult.genres)),
                                 ],
@@ -119,14 +136,21 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
                                       SizedBox(
                                           child: Row(
                                         children: <Widget>[
-                                          FaIcon(FontAwesomeIcons.clock),
+                                          Icon(Icons.av_timer),
                                           SizedBox(width: 10),
                                           Text(
                                               "${detailResult.runtime} Minutes"),
                                         ],
                                       )),
                                       SizedBox(height: 10),
-                                      SizedBox(child: Text("2D")),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: ColorsApp
+                                                      .backgroundDashboardColor)),
+                                          margin: EdgeInsets.all(8),
+                                          // color: Colors.red,
+                                          child: Text("2D")),
                                       SizedBox(height: 40),
                                       SizedBox(
                                         width:
@@ -135,7 +159,10 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             // backgroundColor: ColorsApp.greenApp,
-                                            primary: ColorsApp.greenApp,
+                                            primary: (!widget.isUpcoming)
+                                                ? ColorsApp.greenApp
+                                                : ColorsApp
+                                                    .backgroundDashboardColor,
                                           ),
                                           onPressed: () {},
                                           child: Text("PLAYING AT"),
@@ -147,7 +174,10 @@ class _DetailPlayingScreenState extends State<DetailPlayingScreen> {
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             // backgroundColor: ColorsApp.greenApp,
-                                            primary: ColorsApp.greenApp,
+                                            primary: (!widget.isUpcoming)
+                                                ? ColorsApp.greenApp
+                                                : ColorsApp
+                                                    .backgroundDashboardColor,
                                           ),
                                           onPressed: () {},
                                           child: Text("BUY TICKET"),

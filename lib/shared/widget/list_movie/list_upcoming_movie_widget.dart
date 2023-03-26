@@ -9,9 +9,12 @@ import '../../utils/colors/colors_app.dart';
 import '../../utils/text_style/text_style_app.dart';
 
 class ListUpcomingMovieWidget extends StatelessWidget {
-  const ListUpcomingMovieWidget({
+  bool isUpcoming;
+
+  ListUpcomingMovieWidget({
     Key? key,
     required this.data,
+    this.isUpcoming = false,
   }) : super(key: key);
 
   final List<Results> data;
@@ -43,7 +46,7 @@ class ListUpcomingMovieWidget extends StatelessWidget {
                         value: BlocProvider.of<PlayingBloc>(context)
                           ..add(GetDetailNowPlayingEvent(
                               idMovie: item[index].id)),
-                        child: DetailPlayingScreen(),
+                        child: DetailPlayingScreen(isUpcoming: isUpcoming),
                       ),
                     ));
                   },

@@ -1,3 +1,4 @@
+import 'package:clone_mtix/module/mfood/bloc/mfood_bloc.dart';
 import 'package:clone_mtix/module/playing/bloc/playing_bloc.dart';
 import 'package:clone_mtix/module/upcoming/bloc/upcoming_bloc.dart';
 import 'package:clone_mtix/shared/route/routes.dart';
@@ -37,6 +38,14 @@ class MyApp extends StatelessWidget {
                   theaterOption: TheaterOption.cinemaxxi),
             ),
         ),
+        BlocProvider(
+            create: (context) => MfoodBloc()
+              ..add(
+                GetTheaterFoodEvent(
+                  location: "jakarta",
+                  isSearch: false,
+                ),
+              )),
         // BlocProvider(
         //   create: (context) => TheaterBloc()..add(getLocationCinemaEvent()),
         // ),

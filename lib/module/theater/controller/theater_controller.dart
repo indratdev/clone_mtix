@@ -37,4 +37,14 @@ class TheaterController {
         .toList();
     return datas;
   }
+
+  List<TheaterModel> getTheaterByLocation(String location) {
+    List<TheaterModel> datas;
+
+    datas = allTheater
+        .where((element) =>
+            element.location.toLowerCase().contains(location.toLowerCase()))
+        .toList();
+    return datas;
+  }
 }

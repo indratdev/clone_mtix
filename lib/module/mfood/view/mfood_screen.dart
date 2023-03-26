@@ -1,91 +1,52 @@
-import 'package:clone_mtix/shared/utils/constants/constants.dart';
+import 'package:clone_mtix/module/mfood/bloc/mfood_bloc.dart';
+import 'package:clone_mtix/module/mfood/view/mfood_body_widget.dart';
+
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../shared/utils/colors/colors_app.dart';
-import '../../../shared/utils/text_style/text_style_app.dart';
+import '../../theater/model/theater_model.dart';
 
-class MfoodScreen extends StatelessWidget {
+class MfoodScreen extends StatefulWidget {
   const MfoodScreen({super.key});
+
+  @override
+  State<MfoodScreen> createState() => _MfoodScreenState();
+}
+
+class _MfoodScreenState extends State<MfoodScreen> {
+  String locationCinema = "JAKARTA";
+  List<TheaterModel>? listTheaters;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 5,
-            width: double.infinity,
-            child: Image.asset(xxicafe, fit: BoxFit.cover),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 2,
-                child: InkWell(
-                  onTap: () {
-                    // context.read<TheaterBloc>().add(getLocationCinemaEvent());
-                    // Navigator.pushNamed(
-                    //     context, AppRoutes.theaterLocationScreen);
-                  },
-                  child: Container(
-                    color: Colors.white,
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "Theaters in ",
-                          style: TextStyleApp.titleTextGreen,
-                        ),
-                        Text(
-                          "iiiiii",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyleApp.textDefaultOrange,
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(
-                  // alignment: Alignment.centerRight,
-                  // color: Colors.red,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.locationDot),
-                          label: const Text("Near Me"),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: ColorsApp.greenApp,
-                            elevation: 0,
-                          ),
-                        ),
-                      ]),
-                ),
-              ),
-            ],
-          ),
-          const Divider(
-              thickness: 1, color: ColorsApp.backgroundDashboardColor),
-          TextField(
-            decoration: InputDecoration(
-                hintText: "Type a theater to search",
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                  width: 1,
-                  color: ColorsApp.backgroundDashboardColor,
-                ))),
-          ),
-        ],
+      body: BlocBuilder<MfoodBloc, MfoodState>(
+        builder: (context, state) {
+          if (state is LoadingMfoodLocation) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          }
+
+          if (state is SuccessSelectedTheaterLocationMfood) {
+            List<TheaterModel> listTheaters = state.listData;
+            locationCinema = state.selectedLocation;
+
+            return MfoodBodyWidget(
+              locationCinema: locationCinema,
+              listTheaters: listTheaters,
+            );
+          }
+          if (state is SuccessMfoodLocation) {
+            locationCinema = state.location;
+            listTheaters = state.theaterModel;
+
+            return MfoodBodyWidget(
+              locationCinema: locationCinema,
+              listTheaters: listTheaters,
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

@@ -38,3 +38,5 @@ class SelectedLocationCinemaEvent extends TheaterEvent {
     required this.locationCinema,
   });
 }
+
+class NowPlayingOnCinemaEvent extends TheaterEvent {}

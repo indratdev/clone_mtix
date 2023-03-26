@@ -1,13 +1,18 @@
 import 'package:clone_mtix/module/theaterLocation/view/body_location_theater_screen.dart';
 import 'package:clone_mtix/shared/utils/colors/colors_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/utils/constants/constants.dart';
-import '../../theater/bloc/theater_bloc.dart';
 
 class TheaterLocationScreen extends StatefulWidget {
-  const TheaterLocationScreen({Key? key}) : super(key: key);
+  bool isMfood;
+  bool isPlaying;
+
+  TheaterLocationScreen({
+    Key? key,
+    this.isMfood = false,
+    this.isPlaying = false,
+  }) : super(key: key);
 
   @override
   State<TheaterLocationScreen> createState() => _TheaterLocationScreenState();
@@ -26,7 +31,10 @@ class _TheaterLocationScreenState extends State<TheaterLocationScreen> {
         ),
         centerTitle: true,
       ),
-      body: BodyLocationTheater(),
+      body: BodyLocationTheater(
+        isMfood: widget.isMfood,
+        isPlaying: widget.isPlaying,
+      ),
     );
   }
 }

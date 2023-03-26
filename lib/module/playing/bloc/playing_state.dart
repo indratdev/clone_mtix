@@ -60,3 +60,18 @@ class SuccessDetailNowPlayingMovie extends PlayingState {
 }
 
 // credit movie end
+
+// location
+class SuccessSelectedTheaterLocationPlaying extends PlayingState {
+  String selectedLocation;
+  List<TheaterModel> listData;
+
+  SuccessSelectedTheaterLocationPlaying({
+    required this.selectedLocation,
+    required this.listData,
+  });
+
+  List<Object> get props => [selectedLocation, listData];
+}
+
+// location end

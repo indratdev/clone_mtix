@@ -5,8 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../theater/bloc/theater_bloc.dart';
 
 class BodyLocationTheater extends StatefulWidget {
-  const BodyLocationTheater({
+  bool isMfood;
+  bool isPlaying;
+
+  BodyLocationTheater({
     Key? key,
+    this.isMfood = false,
+    this.isPlaying = false,
   }) : super(key: key);
 
   @override
@@ -49,17 +54,23 @@ class _BodyLocationTheaterState extends State<BodyLocationTheater> {
 
             if (state is SuccessTheaterLocation) {
               masterLocation = state.locationCinema;
-              return ListLocationCinema(masterLocation: masterLocation);
+              return ListLocationCinema(
+                masterLocation: masterLocation,
+                isMfood: widget.isMfood,
+                isPlaying: widget.isPlaying,
+              );
             }
 
             if (state is SuccessListTheaterLocation) {
               var results = state.listLocationCinema;
-              return ListLocationCinema(masterLocation: results);
+              return ListLocationCinema(
+                masterLocation: results,
+                isMfood: widget.isMfood,
+                isPlaying: widget.isPlaying,
+              );
             }
 
-            return const Center(
-              child: Text("No Data"),
-            );
+            return Container();
           },
         )
       ],
